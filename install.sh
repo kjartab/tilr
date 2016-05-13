@@ -1,4 +1,5 @@
 
+# PROBLEMS HERE!! Issues with SSH-ing in and the locale given...    Need to do this on the computer that runs vagrant
 export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
@@ -26,3 +27,17 @@ osm2pgsql -s -C 1024 -S vector-datasource/osm2pgsql.style -k path/to/pbf -d osm 
 sudo apt-get install build-essential autoconf libtool pkg-config
 # dev packages for python and dependencies
 sudo apt-get install python-dev python-virtualenv libgeos-dev libpq-dev python-pip python-pil libmapnik2.2 libmapnik-dev mapnik-utils python-mapnik
+
+
+sudo apt-get -y install python-dateutil
+
+virtualenv env
+source env/bin/activate
+
+git clone https://github.com/mapzen/tileserver.git
+
+
+# PROBLEMS HERE!!
+pip install -U -r tileserver/requirements.txt
+python tileserver/setup.py develop
+
