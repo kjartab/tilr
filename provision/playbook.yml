@@ -11,10 +11,5 @@
     apt: name=git state=present
   - name: install osm2pgsql
     apt: name=osm2pgsql state=present
-
-  - git:
-      accept_hostkey: True
-      dest: ~/
-      force: yes
-      update: yes
-      repo: https://github.com/mapzen/vector-datasource
+  - name: "get vector datasource"
+    git: repo=https://github.com/mapzen/vector-datasource force=yes update=yes dest=~ accept_hostkey=True
