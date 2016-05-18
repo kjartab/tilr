@@ -13,4 +13,4 @@
     apt: name=osm2pgsql state=present
   - name: "get vector datasource"
     become_user: vagrant
-    git: repo=https://github.com/mapzen/vector-datasource force=yes update=yes dest=~ accept_hostkey=True
+    git: repo=https://github.com/mapzen/vector-datasource force=yes update=yes dest=~/vector-datasource accept_hostkey=True
