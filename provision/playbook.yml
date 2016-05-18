@@ -10,7 +10,7 @@
   - name: install git
     apt: name=git state=present
   - name: install osm2pgsql
-    apt: name: osm2pgsql state=present
+    apt: name=osm2pgsql state=present
 
   - git:
       accept_hostkey: True
