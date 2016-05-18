@@ -39,7 +39,7 @@
       template='template0' 
       state=present
 
-  - name: Ensure PostGIS is installed
+  - name: Ensure PostGIS is installed in db
     become_user: postgres
     postgresql_ext: name=postgis db={{ db_name }}
 
@@ -77,7 +77,6 @@
   # Install tileserver
   - name: Get the Mapzen tileserver
     become_user: vagrant
-    git: repo=https://github.com/mapzen/tileserver force=yes update=yes dest={{project_dir}}/tileserver accept_hostkey=True
+    git: repo=https://github.com/mapzen/tileserver   force=yes update=yes dest={{project_dir}}/tileserver accept_hostkey=True
   - name: Install requirements
     pip: requirements={{project_dir}}/tileserver/requirements.txt
-      virtualenv={{project_dir}}/venv
