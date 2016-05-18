@@ -89,4 +89,5 @@
     pip: requirements={{project_dir}}/tileserver/requirements.txt
 
   - name: Load data to PostGIS
-    shell: {{project_dir}}/vector-datasource/add-external-data.sh
+    become_user: {{ sudo_postgres }}
+    shell: {{project_dir}}/vector-datasource/data/add-external-data.sh
