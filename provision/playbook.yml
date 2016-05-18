@@ -92,5 +92,5 @@
     become_user: {{ sudo_postgres }}
     shell: add-external-data.sh
     args: 
-      chdir: {{project_dir}}/vector-datasource/data
-      
+      # chdir: {{ project_dir }}/vector-datasource/data
+      chdir: /home/vagrant/tilr/vector-datasource/data
