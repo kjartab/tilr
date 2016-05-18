@@ -12,4 +12,5 @@
   - name: install osm2pgsql
     apt: name=osm2pgsql state=present
   - name: "get vector datasource"
+    ansible_become_user: vagrant
     git: repo=https://github.com/mapzen/vector-datasource force=yes update=yes dest=~ accept_hostkey=True
