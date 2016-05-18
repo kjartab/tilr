@@ -1,10 +1,20 @@
 ---
 - hosts: all
   become: yes
+  roles:
+  - { role: azavea.postgresql }  
+  - { role: azavea.postgis }  
   tasks: 
   - name: apt get update
     apt: update_cache=yes
   - name: install git
     apt: name=git state=present
-  roles:
-  - { role: azavea.postgresql }  
+  - name: install osm2pgsql
+    apt: name: osm2pgsql state=present
+
+  - git:
+      accept_hostkey: True
+      dest: ~/
+      force: yes
+      update: yes
+      repo: https://github.com/mapzen/vector-datasource
