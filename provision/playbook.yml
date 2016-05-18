@@ -81,15 +81,10 @@
   - name: Get the Mapzen tileserver
     become_user: vagrant
     git: repo=https://github.com/mapzen/tileserver   force=yes update=yes dest={{project_dir}}/tileserver accept_hostkey=True
-  
-  # - name: dateutil requirement that needs to fullfilled prior to requirements.txt install
-  #   pip: name=python-dateutil
-
   - name: Install requirements
     pip: requirements={{project_dir}}/tileserver/requirements.txt
 
   - name: Load data to PostGIS
-    become_user: {{ sudo_postgres }}
     shell: add-external-data.sh
     args: 
       # chdir: {{ project_dir }}/vector-datasource/data
