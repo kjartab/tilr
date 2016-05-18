@@ -23,7 +23,8 @@
   - name: Download new york pbf-file
     become_user: vagrant
     get_url:  url=https://s3.amazonaws.com/metro-extracts.mapzen.com/new-york_new-york.osm.pbf dest={{ project_dir }}/new-york_new-york.pbf
-  
+  - name: install psycopg2
+    pip: name=psycopg2
   - name: Ensure PostgreSQL database exists
     become_user: postgres
     postgresql_db: name={{ db_name }} 
