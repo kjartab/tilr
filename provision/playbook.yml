@@ -8,82 +8,82 @@
     project_dir: /home/vagrant/{{project_name}}
     sudo_postgres: postgres
   
-  # roles:
-  # - { role: azavea.postgresql }  
-  # - { role: azavea.postgis }  
+  roles:
+  - { role: azavea.postgresql }  
+  - { role: azavea.postgis }  
 
   tasks: 
-  # - name: apt get update
-  #   apt: update_cache=yes
-  # - name: install git
-  #   apt: name=git state=present
-  # - name: install osm2pgsql
-  #   apt: name=osm2pgsql state=present
+  - name: apt get update
+    apt: update_cache=yes
+  - name: install git
+    apt: name=git state=present
+  - name: install osm2pgsql
+    apt: name=osm2pgsql state=present
 
-  # # Python stuff
-  # - name: install python related package
-  #   apt: name={{ item.name }} state=present
-  #   with_items:
-  #     - { name: 'python-pip' }
-  #     - { name: 'python-dev' }
+  # Python stuff
+  - name: install python related package
+    apt: name={{ item.name }} state=present
+    with_items:
+      - { name: 'python-pip' }
+      - { name: 'python-dev' }
 
-  # - name: install psycopg2
-  #   pip: name=psycopg2
+  - name: install psycopg2
+    pip: name=psycopg2
 
-  # # setup database + extensions required
-  # - name: Ensure PostgreSQL database exists
-  #   become_user: postgres
-  #   postgresql_db: name={{ db_name }} 
-  #     encoding='UTF-8' 
-  #     lc_collate='en_US.UTF-8' 
-  #     lc_ctype='en_US.UTF-8' 
-  #     template='template0' 
-  #     state=present
+  # setup database + extensions required
+  - name: Ensure PostgreSQL database exists
+    become_user: postgres
+    postgresql_db: name={{ db_name }} 
+      encoding='UTF-8' 
+      lc_collate='en_US.UTF-8' 
+      lc_ctype='en_US.UTF-8' 
+      template='template0' 
+      state=present
 
-  # - name: Ensure PostGIS is installed in db
-  #   become_user: postgres
-  #   postgresql_ext: name=postgis db={{ db_name }}
+  - name: Ensure PostGIS is installed in db
+    become_user: postgres
+    postgresql_ext: name=postgis db={{ db_name }}
 
-  # - name: Ensure hstore is installed
-  #   become_user: postgres
-  #   postgresql_ext: name=hstore db={{ db_name }}
+  - name: Ensure hstore is installed
+    become_user: postgres
+    postgresql_ext: name=hstore db={{ db_name }}
 
-  # - name: Install dev dependencies for mapzen
-  #   apt: name={{ item.name }} state=present
-  #   with_items:
-  #     - { name: 'build-essential' }
-  #     - { name: 'autoconf' }
-  #     - { name: 'libtool' }
-  #     - { name: 'pkg-config' }
-  #     - { name: 'python-virtualenv' }
-  #     - { name: 'unzip' }
-  #     - { name: 'libgeos-dev' }
-  #     - { name: 'libpq-dev' }
-  #     - { name: 'libgeos-dev' }
-  #     - { name: 'python-pil' }
-  #     - { name: 'libmapnik2.2' }
-  #     - { name: 'libmapnik-dev' }
-  #     - { name: 'mapnik-utils' }
-  #     - { name: 'python-mapnik' }
-  #     - { name: 'python-dateutil' }
+  - name: Install dev dependencies for mapzen
+    apt: name={{ item.name }} state=present
+    with_items:
+      - { name: 'build-essential' }
+      - { name: 'autoconf' }
+      - { name: 'libtool' }
+      - { name: 'pkg-config' }
+      - { name: 'python-virtualenv' }
+      - { name: 'unzip' }
+      - { name: 'libgeos-dev' }
+      - { name: 'libpq-dev' }
+      - { name: 'libgeos-dev' }
+      - { name: 'python-pil' }
+      - { name: 'libmapnik2.2' }
+      - { name: 'libmapnik-dev' }
+      - { name: 'mapnik-utils' }
+      - { name: 'python-mapnik' }
+      - { name: 'python-dateutil' }
 
 
 
-  # # Downloading data
-  # - name: Get vector datasource
-  #   become_user: vagrant
-  #   git: repo=https://github.com/mapzen/vector-datasource force=yes update=yes dest={{project_dir}}/vector-datasource accept_hostkey=True
-  # - name: Download new york pbf-file
-  #   become_user: vagrant
-  #   get_url:  url=https://s3.amazonaws.com/metro-extracts.mapzen.com/new-york_new-york.osm.pbf dest={{ project_dir }}/new-york_new-york.pbf
+  # Downloading data
+  - name: Get vector datasource
+    become_user: vagrant
+    git: repo=https://github.com/mapzen/vector-datasource force=yes update=yes dest={{project_dir}}/vector-datasource accept_hostkey=True
+  - name: Download new york pbf-file
+    become_user: vagrant
+    get_url:  url=https://s3.amazonaws.com/metro-extracts.mapzen.com/new-york_new-york.osm.pbf dest={{ project_dir }}/new-york_new-york.pbf
   
-  # # Install tileserver
-  # - name: Get the Mapzen tileserver
-  #   become_user: vagrant
-  #   git: repo=https://github.com/mapzen/tileserver   force=yes update=yes dest={{project_dir}}/tileserver accept_hostkey=True
+  # Install tileserver
+  - name: Get the Mapzen tileserver
+    become_user: vagrant
+    git: repo=https://github.com/mapzen/tileserver   force=yes update=yes dest={{project_dir}}/tileserver accept_hostkey=True
   
-  # - name: Install requirements
-  #   pip: requirements={{project_dir}}/tileserver/requirements.txt
+  - name: Install requirements
+    pip: requirements={{project_dir}}/tileserver/requirements.txt
 
   - name: Load data to PostGIS
     become_user: postgres
@@ -91,6 +91,14 @@
     # args: 
     #   # chdir: {{ project_dir }}/vector-datasource/data
     #   chdir: /home/vagrant/tilr/vector-datasource/data
+
+
+
+
+
+
+  # TODO - load up the data!
+
 
   # - name: Load data to PostGIS
   #   become_user: postgres
