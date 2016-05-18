@@ -1,6 +1,6 @@
 ---
-- name: Deploy 
-  hosts: local
-- name: apt-get update
-  remote_user: ansible
-  apt: name=foo update_cache=yes
+- hosts: all
+  become: yes
+  tasks: 
+  - name: apt get update
+    apt: update_cache=yes
