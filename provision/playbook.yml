@@ -80,7 +80,7 @@
   # Install tileserver
   - name: Get the Mapzen tileserver
     become_user: vagrant
-    git: repo=https://github.com/mapzen/tileserver   force=yes update=yes dest={{project_dir}}/tileserver accept_hostkey=True
+    git: repo=https://github.com/mapzen/tileserver force=yes update=yes dest={{project_dir}}/tileserver accept_hostkey=True
   
   - name: Install requirements
     pip: requirements={{project_dir}}/tileserver/requirements.txt
