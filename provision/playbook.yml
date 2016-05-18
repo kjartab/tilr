@@ -90,7 +90,9 @@
 
   - name: Load data to PostGIS
     become_user: {{ sudo_postgres }}
-    shell: {{project_dir}}/vector-datasource/add-external-data.sh -d osm 
+    shell: {{project_dir}}/vector-datasource/add-external-data.sh
+    args:
+      d={{ db_name }}
   
   # - name: Load data to PostGIS
   #   become_user: {{ sudo_postgres }}
