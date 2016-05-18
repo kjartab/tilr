@@ -63,7 +63,9 @@
       - { name: 'libmapnik2.2' }
       - { name: 'libmapnik-dev' }
       - { name: 'mapnik-utils' }
-      - { name: 'python-mapnik' }   
+      - { name: 'python-mapnik' }
+      - { name: 'python-dateutil' }
+
 
 
   # Downloading data
@@ -80,3 +82,6 @@
     git: repo=https://github.com/mapzen/tileserver   force=yes update=yes dest={{project_dir}}/tileserver accept_hostkey=True
   - name: Install requirements
     pip: requirements={{project_dir}}/tileserver/requirements.txt
+
+  # - name: PostgreSQL
+  #   shell: {{project_dir}}/vector-datasource/add-external-data.sh -d osm 
