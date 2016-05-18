@@ -42,13 +42,11 @@
       template='template0' 
       state=present
 
-  # - name: Ensure user has access to the database 
-  #   sudo_user: postgres 
-  #   postgresql_user: db={{ db_name }} 
-  #     name={{ db_user }} 
-  #     password={{ db_password }} 
-  #     priv=ALL state=present
-  # - name: Ensure PostGIS is installed
-  #   postgresql_ext: 
+  - name: Ensure PostGIS is installed
+    become_user: postgres
+    postgresql_ext: name=postgis db={{ db_name }}
 
-  # - name: Ensure hstore is installed
+
+  - name: Ensure hstore is installed
+    become_user: postgres
+    postgresql_ext: name=hstore db={{ db_name }}
