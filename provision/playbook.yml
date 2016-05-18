@@ -74,7 +74,11 @@
     become_user: vagrant
     get_url:  url=https://s3.amazonaws.com/metro-extracts.mapzen.com/new-york_new-york.osm.pbf dest={{ project_dir }}/new-york_new-york.pbf
   
+  # Install tileserver
   - name: Get the Mapzen tileserver
     become_user: vagrant
     git: repo=https://github.com/mapzen/tileserver force=yes update=yes dest={{project_dir}}/tileserver accept_hostkey=True
-  
+  - name: Install requirements
+    pip: 
+      requirements: {{project_dir}}/tileserver/requirements.txt
+      virtualenv: {{project_dir}}/venv
