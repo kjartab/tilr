@@ -19,7 +19,6 @@
   - name: "get vector datasource"
     become_user: vagrant
     git: repo=https://github.com/mapzen/vector-datasource force=yes update=yes dest=~/vector-datasource accept_hostkey=True
-  
   - name: download new york pbf-file
     become_user: vagrant
     get_url: https://s3.amazonaws.com/metro-extracts.mapzen.com/new-york_new-york.osm.pbf
