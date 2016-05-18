@@ -87,10 +87,10 @@
 
   - name: Load data to PostGIS
     become_user: postgres
-    shell: add-external-data.sh -d osm
-    args: 
-      # chdir: {{ project_dir }}/vector-datasource/data
-      chdir: /home/vagrant/tilr/vector-datasource/data
+    shell: {{ project_dir }}/vector-datasource/dataadd-external-data.sh -d osm
+    # args: 
+    #   # chdir: {{ project_dir }}/vector-datasource/data
+    #   chdir: /home/vagrant/tilr/vector-datasource/data
 
   # - name: Load data to PostGIS
   #   become_user: postgres
