@@ -79,6 +79,5 @@
     become_user: vagrant
     git: repo=https://github.com/mapzen/tileserver force=yes update=yes dest={{project_dir}}/tileserver accept_hostkey=True
   - name: Install requirements
-    pip: 
-      requirements: {{project_dir}}/tileserver/requirements.txt
-      virtualenv: {{project_dir}}/venv
+    pip: requirements={{project_dir}}/tileserver/requirements.txt
+      virtualenv={{project_dir}}/venv
