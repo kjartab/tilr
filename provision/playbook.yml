@@ -4,3 +4,7 @@
   tasks: 
   - name: apt get update
     apt: update_cache=yes
+  - name: install git
+    apt: name=git state=present
+  roles:
+  - { role: azavea.postgresql }  
